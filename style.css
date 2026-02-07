@@ -1,57 +1,47 @@
-/* चौड़ा कंटेनर ताकि बड़ी फोटो आ सकें */
-.wide-container {
-    max-width: 600px !important;
-    width: 95%;
+:root {
+    --primary-pink: #ff6b95;
+    --deep-red: #d92546;
+    --bg-gradient: linear-gradient(135deg, #ffe4e9 0%, #fff0f3 100%);
 }
 
-.photo-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* मोबाइल पर एक बड़ी फोटो */
-    gap: 30px;
-    padding: 20px 10px;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background: var(--bg-gradient); overflow-x: hidden; }
 
-.grid-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+.slide { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.8s; z-index: 1; }
+.slide.active-slide { opacity: 1; visibility: visible; z-index: 10; overflow-y: auto; display: block; padding-top: 50px;}
 
-/* Rose Frame Design */
-.rose-frame {
-    padding: 15px; /* फ्रेम की मोटाई */
-    background: white;
-    position: relative;
-    /* गुलाबों वाला बॉर्डर बनाने के लिए */
-    border: 10px solid transparent;
-    border-image: url('https://img.icons8.com/emoji/48/000000/rose.png') 30 round; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
+.bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: -1; }
 
-.grid-item img {
-    width: 100%;
-    height: auto; 
-    display: block;
-    object-fit: contain; /* फोटो का ओरिजिनल साइज पूरा दिखेगा */
-    border-radius: 5px;
-}
+.content-container { background: rgba(255, 255, 255, 0.9); padding: 30px 20px; border-radius: 25px; box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3); max-width: 450px; width: 90%; margin: 20px auto; text-align: center; }
+.wide-container { max-width: 600px; }
 
-/* फोटो के नीचे वाला नाम/कैप्शन */
-.photo-caption {
-    margin-top: 12px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: #d92546;
-    font-size: 1rem;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 5px 15px;
-    border-radius: 20px;
-}
+.main-title, .script-title { font-family: 'Dancing Script', cursive; color: var(--deep-red); margin-bottom: 15px; }
+.main-title { font-size: 2.2rem; }
 
-/* बड़ी स्क्रीन (Laptop) के लिए */
-@media (min-width: 768px) {
-    .photo-grid {
-        grid-template-columns: 1fr 1fr; /* लैपटॉप पर दो फोटो बगल में */
-    }
-}
+/* Memory Grid & Rose Frame */
+.photo-grid { display: flex; flex-direction: column; gap: 40px; margin: 20px 0; }
+.grid-item { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.rose-frame { padding: 10px; background: white; border: 6px solid #ff4d6d; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; }
+.grid-item img { width: 100%; height: auto; object-fit: contain; border-radius: 8px; display: block; }
+.photo-caption { margin-top: 10px; font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--deep-red); font-weight: bold; }
+
+.btn-main { background: var(--deep-red); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; margin-top: 20px; font-weight: bold; }
+.hidden-initially { opacity: 0; pointer-events: none; }
+.hidden-initially.show { opacity: 1; pointer-events: auto; }
+
+/* Roses & Modal Styles */
+.roses-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.rose-item { cursor: pointer; text-align: center; }
+.rose-icon { font-size: 2.5rem; }
+.message-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100; display: flex; justify-content: center; align-items: center; }
+.modal-content { background: white; padding: 20px; border-radius: 20px; width: 85%; max-width: 350px; position: relative; }
+.modal-img { width: 100%; border-radius: 10px; }
+.hidden { display: none !important; }
+
+/* Finale Styles */
+.heart-name-wrapper { position: relative; width: 250px; height: 250px; margin: 0 auto; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.pulsing-heart-shape { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, var(--primary-pink), transparent); animation: pulse 1.5s infinite; }
+.names-text { font-family: 'Parisienne', cursive; font-size: 2rem; color: var(--deep-red); z-index: 5; text-align: center; }
+.final-bouquet { width: 100%; max-width: 250px; transform: scale(0); }
+
+@keyframes pulse { 0% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.8; } 100% { transform: scale(0.9); opacity: 0.5; } }
